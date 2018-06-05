@@ -172,3 +172,36 @@ a{
 .el-tabs--card>.el-tabs__header .el-tabs__item{
 	border-left: none !important;
 }
+
+/*分页按钮(有背景)*/
+/*.el-pagination.is-background .el-pager li:hover,
+.el-pagination.is-background .btn-next:hover,
+.el-pagination.is-background .btn-prev:hover{
+	color: #0085B5 !important;
+}
+.el-pagination.is-background .el-pager li.active,
+.el-pagination.is-background .el-pager li.active:hover{
+	background-color: #0085B5 !important;
+	color: white !important;
+	cursor: pointer;
+}*/
+.el-pagination{
+	position: absolute;
+	right: 0;
+	bottom: 2px;
+}
+
+.el-pagination .el-pager li:hover,
+.el-pagination .btn-next:hover,
+.el-pagination .btn-prev:hover,
+.el-pagination .el-pager li.active{
+	color: #0085B5 !important;
+}
+
+.el-table--mini th{
+	padding:2px 0 !important;
+}
+
+.el-pagination .el-pager li{
+	color: #606266;
+}

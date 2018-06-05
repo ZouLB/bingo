@@ -34,11 +34,12 @@
 					</template>
 			    </el-table-column>
 			</el-table>
-			<!--<el-pagination
-			  layout="prev, pager, next"
-			  :total="1000">
-			</el-pagination>-->
 		</div>
+		<el-pagination
+			layout="prev, pager, next"
+			@current-change="handleCurrent"
+			:page-size="13" :total="total" style="float:right;">
+		</el-pagination>
 	</section>
 </template>
 
@@ -55,7 +56,9 @@
 	        project_id:'',
 	        listLoading:false,
 	        currentRow: null,
-	        searchTag:''
+	        searchTag:'',
+	        total:100,
+	        page:1,
 	      }
 	    },
 	    methods: {
@@ -133,19 +136,23 @@
 					removeTRbyCid({calId:row.id,projectId:this.project_id}).then((res) => {	//删除标签关系
 						removeKnowledge({id:row.id}).then((res) => {
 							this.listLoading = false;
-					this.$message({
-						message: '删除成功',
-						type: 'success'
-					});
+							this.$message({
+								message: '删除成功',
+								type: 'success'
+							});
 							this.getData();
 						});	//删除口径
-//						this.getData();
 					})
 					
 				}).catch(() => {
 					
 				});
 	    	},
+	    	//分页
+	    	handleCurrent(val) {
+				this.page = val;
+				this.getData();
+			}
 	    	
 	    },
 	    mounted(){
@@ -203,7 +210,7 @@
 		left: 11px;
 		bottom: 11px;
 		right: 11px;
-		border: 1px solid gainsboro;
+		/*border: 1px solid gainsboro;*/
 		overflow: auto;
 		&::-webkit-scrollbar{
 			width: 8px;
@@ -233,7 +240,7 @@
 			color: #666;
 		}
 		.el-table--border, .el-table--group{
-			border: none;
+			/*border: none;*/
 		}
 		.el-table--mini, .el-table--small, .el-table__expand-icon{
 			font-size: 14px;
@@ -242,5 +249,6 @@
 			text-align: center;
 		}
 	}
+	
 	
 </style>
