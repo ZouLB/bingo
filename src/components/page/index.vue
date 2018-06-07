@@ -5,7 +5,7 @@
 				<el-col :xs="12" :sm="8" :md="6" v-for="(v,i) in proData">
 					<div class="card">
 						<router-link :to="'/project/'+v[0]+'/'+v[1]">
-							<el-card>
+							<el-card :style="{backgroundImage: 'url(' +bg + ')'}">
 								{{v[1]}}
 							</el-card>
 						</router-link>
@@ -64,6 +64,7 @@
 		        		{ required: true, message: '请输入项目名称', trigger: 'blur' }
 		        	]
 		        },
+		        bg:require('../../assets/img/project_bg.png')
 			}
 		},
 		methods:{
@@ -124,7 +125,8 @@
 			color: white;
 			font: 20px "微软雅黑";
 			overflow: hidden;
-			background: url(../../assets/img/project_bg.png) no-repeat 100%;
+			/*background: url(../../assets/img/project_bg.png) no-repeat 100%;*/
+			background:no-repeat 100%;
 			i{
 				display: block;
 				font-size: 35px;

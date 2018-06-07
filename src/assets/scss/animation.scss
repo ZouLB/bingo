@@ -4,28 +4,30 @@
       top: 0;  
       width: 100%;  
       height: 100%;  
-      transition: all .5s;  
+      transition: all .2s;  
     } 
     
-    .fade-enter-active{
-        animation:fadeIn .5s ;
-    }
-    .fade-leave-active{
-        animation:fadeOut .5s ;
-    }
-    @keyframes fadeIn{
-        from{
-            opacity: 0;
-        }
-        to{
-            opacity: 1;
-        }
-    }
-    @keyframes fadeOut{
-        from{
-            opacity: 1;
-        }
-        to{
-            opacity: 0;
-        }
-    }
+//  .fade-enter-active{
+//      animation:fadeIn .2s ;
+//  }
+//  .fade-leave-active{
+//      animation:fadeOut .2s ;
+//  }
+//  @keyframes fadeIn{
+//      from{ opacity: 0;}
+//      to{ opacity: 1;}
+//  }
+//  @keyframes fadeOut{
+//      from{ opacity: 1;}
+//      to{ opacity: 0;}
+//  }
+    
+.fade-enter-active,
+.fade-leave-active {
+    transition: all .2s ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}

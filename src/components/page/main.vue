@@ -4,18 +4,18 @@
 		<div class="head clearfix">
 			<span>业务口径</span>
 			<router-link to="add"><el-button type="primary" size="small" plain>新增</el-button></router-link>
-			<el-button type="primary" size="small" @click="getData()" class='search' plain>查询</el-button>
+			<el-button type="primary" size="small" @click="getData()" class='search' plain>搜索</el-button>
 			<!--<el-input placeholder="口径名称" clearable size="small" v-model="filters.name"></el-input>-->
 			<input type="text" placeholder="搜索口径主题" v-model="filters.name" @keyup="getData()"/>
 		</div>
 		
 		<!--表格-->
-		<div class="content">
+		<div class="content" ref="ele">
 			<el-table
 			    ref="singleTable"
 			    :data="tableData"
 			    highlight-current-row
-			    v-loading="listLoading"
+			    :v-loading="listLoading"
 			    stripe
 			    border
 			    size="mini"
@@ -29,16 +29,17 @@
 			    <el-table-column property="operation" label="操作" width="80">
 			    	<template scope="scope" >
 			    		<router-link :to="{path:'edit',query: {id:scope.row.id}}"><i class="el-icon-edit-outline" title="编辑"></i></router-link>
-			    		<!--<router-link :to="'edit/'+scope.row.id"><i class="el-icon-edit" title="编辑"></i></router-link>-->
 			    		<i class="el-icon-delete" title="删除" @click="del(scope.$index, scope.row)"></i>
 					</template>
 			    </el-table-column>
 			</el-table>
 		</div>
 		<el-pagination
-			layout="prev, pager, next"
+			layout="sizes, prev, pager, next"
+			@size-change="handleSizeChange"
 			@current-change="handleCurrent"
-			:page-size="13" :total="total" style="float:right;">
+     		:page-sizes="[100, 150, 200, 250]"
+			:page-size="50" :total="total" style="float:right;">
 		</el-pagination>
 	</section>
 </template>
@@ -57,8 +58,9 @@
 	        listLoading:false,
 	        currentRow: null,
 	        searchTag:'',
-	        total:100,
+	        total:0,
 	        page:1,
+	        pageSize:50
 	      }
 	    },
 	    methods: {
@@ -86,6 +88,7 @@
 					//数据处理
 					let a=res.data.columnNames;
 					let b=res.data.rows;
+					this.total=b.length;//页数
 					let data = b.map((bb,i) =>{
 						let temp = {};
 						bb.forEach((bbb,j) =>{
@@ -112,6 +115,7 @@
 					//数据处理
 					let a=res.data.columnNames;
 					let b=res.data.rows;
+					this.total=b.length;//页数
 					let data = b.map((bb,i) =>{
 						let temp = {};
 						bb.forEach((bbb,j) =>{
@@ -152,11 +156,17 @@
 	    	handleCurrent(val) {
 				this.page = val;
 				this.getData();
-			}
+			},
+			handleSizeChange(val) {
+//		        console.log(`每页 ${val} 条`);
+		    },
 	    	
 	    },
 	    mounted(){
 	    	this.getData();
+//	    	this.pageSize= this.$refs.ele.offsetHeight/37;
+//	    	console.log(parseInt(this.pageSize));
+//			console.log(this.$refs.ele.offsetHeight)
 		},
 		watch:{
 	   		'$route' (to, from){
@@ -208,7 +218,7 @@
 		position: absolute;
 		top: 59px;
 		left: 11px;
-		bottom: 11px;
+		bottom: 46px;/*11px*/
 		right: 11px;
 		/*border: 1px solid gainsboro;*/
 		overflow: auto;
@@ -249,6 +259,4 @@
 			text-align: center;
 		}
 	}
-	
-	
 </style>

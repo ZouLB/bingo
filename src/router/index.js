@@ -5,11 +5,13 @@ import project from '@/components/page/project'
 import main from '@/components/page/main'
 import edit from '@/components/page/edit'
 import add from '@/components/page/add'
+import login from '@/components/page/login'
 Vue.use(Router)
 
 export default new Router({
   routes: [
-  	{path:'/',redirect:'/index'},
+  	{path:'/',redirect:'/login'},
+		{path:'/login',component:login},
 		{path:'/index',component:index},
 		{
 			path:'/project/:pid/:pname',

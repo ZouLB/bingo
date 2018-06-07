@@ -49,6 +49,12 @@ a{
 	text-decoration: none;
 }
 
+/*解决输入框变黄色*/
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+    -webkit-text-fill-color: #606266 !important;
+}
+
 /*sql*/
 .CodeMirror{
 	position: absolute;
@@ -85,8 +91,11 @@ a{
 	border-color: #0085B5;
 	background-color: #0085B5;
 }
-.el-form-item__content .el-button--primary:hover{
-	background-color: #409EFF;
+.el-form-item__content .el-button--primary:hover,
+.el-form-item__content .el-button--primary:focus,
+.el-form-item__content .el-button--primary:active{
+	background-color: #0193C9;/*#409EFF*/
+	border-color: #0193C9;
 }
 
 .el-input .el-input__inner:focus,
@@ -157,7 +166,7 @@ a{
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	z-index: 99;
+	z-index: 1;
 }
 .el-tabs .el-tabs__item.is-top{
     width: 96px;
@@ -188,7 +197,7 @@ a{
 .el-pagination{
 	position: absolute;
 	right: 0;
-	bottom: 2px;
+	bottom: 7px;
 }
 
 .el-pagination .el-pager li:hover,
@@ -198,10 +207,19 @@ a{
 	color: #0085B5 !important;
 }
 
-.el-table--mini th{
-	padding:2px 0 !important;
+.right .el-table--mini th{
+	padding:1px 0;
 }
 
 .el-pagination .el-pager li{
 	color: #606266;
+}
+.right .el-pagination .el-select .el-input{
+	margin: 0;
+}
+.right .el-pagination .el-select .el-input .el-input__inner{
+	height: 24px;
+}
+.el-select-dropdown__list .el-select-dropdown__item.selected{
+	color: #0085B5;
 }

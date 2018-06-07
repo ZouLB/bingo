@@ -4,7 +4,7 @@
 	    	<v-nav></v-nav>
 	    </div>
 	    <div class="right">
-	    	<transition name='fade'>
+	    	<transition name='fade' mode="out-in">
 		    	<router-view class="child-view"></router-view>
 		    </transition>
 		</div>
@@ -36,13 +36,13 @@
 		background-color: $comcolor;
 		overflow: auto;
 		&::-webkit-scrollbar{
-			width: 11px;
+			width: 9px;
 			height: 16px;
 			background-color:$comcolor;
 			cursor: pointer;
 		}
 		&::-webkit-scrollbar-thumb{
-			border-radius: 11px;
+			border-radius: 9px;
 			background-color: #aaa;
 			cursor: pointer;
 		}
