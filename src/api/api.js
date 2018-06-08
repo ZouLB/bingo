@@ -13,14 +13,23 @@ export const addProject = params => { return axios.post(`${base}/insertCalProjec
 //获取口径数据
 export const getKnowledge = params => { return axios.post(`${base}/selectCalKLByNameAndProID`, params); };
 
+//获取口径(分页)
+export const getKnowledgePage = params => { return axios.post(`${base}/selectCalKLPage`, params); };
+
 //根据标签获取口径数据
 export const getKnowledgeByTag = params => { return axios.post(`${base}/selectCalKLByTagAndPid`, params); };
+
+//根据标签获取口径数据(分页)
+export const getKnowledgeByTagPage = params => { return axios.post(`${base}/selectCalKLByTagPage`, params); };
 
 //新增口径数据
 export const addKnowledge = params => { return axios.post(`${base}/insertCalKnowledge`, params); };
 
 //删除口径
 export const removeKnowledge = params => { return axios.get(`${base}/deleteCalKnowledgeById`, { params: params }); };
+
+//获取要编辑的口径
+export const getEditKnowledge = params => { return axios.post(`${base}/selectCalKLByIDAndPID`, params); };
 
 //编辑口径
 export const editKnowledge = params => { return axios.post(`${base}/updateCalKnowledgeByID`,  params); };

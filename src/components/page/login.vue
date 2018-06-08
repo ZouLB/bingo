@@ -34,6 +34,7 @@
     },
     methods: {
       handleSubmit(ev) {
+      	sessionStorage.setItem('user', 'zlb');
       	this.$router.push({ path: '/index' });
 //      var _this = this;
 //      this.$refs.ruleForm.validate((valid) => {

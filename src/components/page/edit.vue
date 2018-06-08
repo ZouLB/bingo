@@ -57,7 +57,7 @@
 
 <script>
 	import util from '../../assets/js/util';
-	import { getKnowledge, editKnowledge, getTag, getEditTag, addTag, addTagRela, removeTRbyAll} from '../../api/api'
+	import { getKnowledge, getEditKnowledge, editKnowledge, getTag, getEditTag, addTag, addTagRela, removeTRbyAll} from '../../api/api'
 	import { codemirror } from 'vue-codemirror'  
 	require("codemirror/mode/sql/sql.js")			
 	require("codemirror/addon/hint/show-hint.js")	
@@ -77,7 +77,7 @@
 		            desc: '',
 		            sql:'',
 		            formula:'',
-		            creator:'',//获取登录用户
+		            creator:'',
 		            createTime:'',
 				},
 				rules: {
@@ -105,24 +105,18 @@
 			},
 			//获取编辑数据
 			getEditData(){
-	    		let para = {
-	    			projectId:this.project_id,
-					name: ''
-				};
 				//口径数据
-				getKnowledge(para).then((res) => {
+				getEditKnowledge({projectId:this.project_id,id: this.id}).then((res) => {
 					let a=Object.keys(this.editForm);
 					let b=res.data.rows;
 					let data ={};
 					b.map((bb,i) =>{
-						if(bb[0]==this.id){		//判断id
-							bb.forEach((bbb,j) =>{
-								data = {
-									...data,
-									[a[j]]:bbb
-								}
-							})
-						}
+						bb.forEach((bbb,j) =>{
+							data = {
+								...data,
+								[a[j]]:bbb
+							}
+						})
 					})
 					this.editForm = data;
 					if(this.editForm.sql!=''){
@@ -131,6 +125,22 @@
 						this.both=false;
 					}
 				});
+//				//口径数据
+//				getKnowledge({projectId:this.project_id,name: ''}).then((res) => {
+//					let a=Object.keys(this.editForm);
+//					let b=res.data.rows;
+//					let data ={};
+//					b.map((bb,i) =>{
+//						if(bb[0]==this.id){		//判断id
+//							bb.forEach((bbb,j) =>{
+//								data = {
+//									...data,
+//									[a[j]]:bbb
+//								}
+//							})
+//						}
+//					})
+//				});
 				//标签数据
 				getTag({projectId:this.project_id}).then((res) => {
 					this.selectTag=res.data.rows;    		
@@ -150,6 +160,7 @@
 						let para = Object.assign({}, this.editForm);
 						para.id=this.id;
 						para.projectId=this.project_id;
+//						para.creator='lisi';//获取登录用户
 						para.createTime =util.formatDate.format(new Date(), 'yyyy-MM-dd');
 						editKnowledge(para).then((res) => {
 							//新增不存在的标签和关系

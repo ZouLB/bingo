@@ -10,7 +10,7 @@
 		</div>
 		
 		<!--表格-->
-		<div class="content" ref="ele">
+		<div class="content">
 			<el-table
 			    ref="singleTable"
 			    :data="tableData"
@@ -38,14 +38,15 @@
 			layout="sizes, prev, pager, next"
 			@size-change="handleSizeChange"
 			@current-change="handleCurrent"
-     		:page-sizes="[100, 150, 200, 250]"
-			:page-size="50" :total="total" style="float:right;">
+			:current-page.sync="currentPage"
+     		:page-sizes="[20, 50, 100]"
+			:total="total" style="float:right;">
 		</el-pagination>
 	</section>
 </template>
 
 <script>
-	import { getKnowledge , removeKnowledge, getKnowledgeByTag, removeTRbyCid} from '../../api/api';
+	import { getKnowledge, getKnowledgePage , removeKnowledge, getKnowledgeByTag, getKnowledgeByTagPage, removeTRbyCid} from '../../api/api';
 	
   	export default {
 	    data() {
@@ -60,7 +61,8 @@
 	        searchTag:'',
 	        total:0,
 	        page:1,
-	        pageSize:50
+	        pageSize:20,
+	        currentPage:1
 	      }
 	    },
 	    methods: {
@@ -81,14 +83,20 @@
 	    	getAllData(){
 	    		let para = {
 	    			projectId:this.project_id,
-					name: this.filters.name
+					name: this.filters.name,
+					startIndex: (this.page-1)*this.pageSize,
+					pageSize: this.pageSize
 				};
 				this.listLoading = true;
-				getKnowledge(para).then((res) => {
+				
+				//获取总数
+				getKnowledge({projectId:this.project_id,name: this.filters.name,}).then((res) => {
+					this.total=res.data.rowCount;
+				})
+				getKnowledgePage(para).then((res) => {
 					//数据处理
 					let a=res.data.columnNames;
 					let b=res.data.rows;
-					this.total=b.length;//页数
 					let data = b.map((bb,i) =>{
 						let temp = {};
 						bb.forEach((bbb,j) =>{
@@ -108,14 +116,19 @@
 		    	let para = {
 	    			projectId:this.project_id,
 					tag: this.searchTag,
-					name: this.filters.name
+					name: this.filters.name,
+					startIndex: (this.page-1)*this.pageSize,
+					pageSize: this.pageSize
 				};
 				this.listLoading = true;
-				getKnowledgeByTag(para).then((res) => {
+				//获取总数
+				getKnowledgeByTag({projectId:this.project_id,tag: this.searchTag,name: this.filters.name}).then((res) => {
+					this.total=res.data.rowCount;
+				})
+				getKnowledgeByTagPage(para).then((res) => {
 					//数据处理
 					let a=res.data.columnNames;
 					let b=res.data.rows;
-					this.total=b.length;//页数
 					let data = b.map((bb,i) =>{
 						let temp = {};
 						bb.forEach((bbb,j) =>{
@@ -154,26 +167,27 @@
 	    	},
 	    	//分页
 	    	handleCurrent(val) {
+	    		this.currentPage = val;//页数高亮
 				this.page = val;
 				this.getData();
 			},
 			handleSizeChange(val) {
-//		        console.log(`每页 ${val} 条`);
+				this.pageSize = val
+		        this.getData();
 		    },
 	    	
 	    },
 	    mounted(){
 	    	this.getData();
-//	    	this.pageSize= this.$refs.ele.offsetHeight/37;
-//	    	console.log(parseInt(this.pageSize));
-//			console.log(this.$refs.ele.offsetHeight)
 		},
 		watch:{
 	   		'$route' (to, from){
+	    		this.handleCurrent(1);//跳转为第一页
 	    		this.getData();
 	   		},
 	   		getData(){
 	   			this.getData();
+	   			
 	   		}
 	   }
 	}

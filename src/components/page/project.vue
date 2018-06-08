@@ -16,10 +16,12 @@
 	import vnav from '../common/nav.vue'
 	
 	export default {
-	  name: 'App',
-	  components: {
-	    'v-nav': vnav
-	  }
+		name: 'App',
+		components: {
+			'v-nav': vnav
+		},
+		mounted() {
+		}
 	}
 </script>
 
