@@ -60,6 +60,14 @@
 //        }
 //      });
       }
+    },
+    mounted(){
+    	//登录rds
+    	this.$axios.post('http://10.201.76.230:8080/rds//auth/login',{
+    		name:"admin",
+    		password:"admin"
+    	}).then(function(res){
+		})
     }
   }
 

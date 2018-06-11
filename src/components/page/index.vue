@@ -2,7 +2,7 @@
 	<section>
 		<div class="main">
 			<el-row :gutter="12">
-				<el-col :xs="12" :sm="8" :md="6" v-for="(v,i) in proData">
+				<el-col :xs="12" :sm="8" :md="6" v-for="(v,i) in proData" :key="i">
 					<div class="card">
 						<router-link :to="'/project/'+v[0]+'/'+v[1]">
 							<el-card :style="{backgroundImage: 'url(' +bg + ')'}">
@@ -109,8 +109,7 @@
 		},
 		mounted(){
 			this.getProData();
-			console.log(sessionStorage.getItem('user'))
-			
+//			console.log(sessionStorage.getItem('user'))
 //	   		var user = sessionStorage.getItem('user');
 //			if (user) {
 //				user = JSON.parse(user);

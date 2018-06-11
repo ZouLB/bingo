@@ -14,9 +14,6 @@ Vue.use(ElementUI)
 Vue.use(VueCodemirror)  
 Vue.prototype.$axios = axios;
 
-//import Mock from './mock';
-//Mock.bootstrap();
-
 Vue.config.productionTip = false
 
 new Vue({

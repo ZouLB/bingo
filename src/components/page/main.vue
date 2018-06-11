@@ -22,12 +22,12 @@
 			    tooltip-effect="dark"
 			    @current-change="handleCurrentChange"
 			    style="width: 100%;">
-			    <el-table-column property="name" label="口径主题" width="170" show-overflow-tooltip sortable></el-table-column>
+			    <el-table-column property="name" label="口径主题" width="200" show-overflow-tooltip sortable></el-table-column>
 			    <el-table-column property="desc" label="口径内容" show-overflow-tooltip></el-table-column>
-			    <el-table-column property="creator" label="填写人" width="130" sortable></el-table-column>
-			    <el-table-column property="create_time" label="填写时间" width="130" sortable></el-table-column>
+			    <el-table-column property="creator" label="填写人" width="140" sortable></el-table-column>
+			    <el-table-column property="create_time" label="填写时间" width="140" sortable></el-table-column>
 			    <el-table-column property="operation" label="操作" width="80">
-			    	<template scope="scope" >
+			    	<template slot-scope="scope" >
 			    		<router-link :to="{path:'edit',query: {id:scope.row.id}}"><i class="el-icon-edit-outline" title="编辑"></i></router-link>
 			    		<i class="el-icon-delete" title="删除" @click="del(scope.$index, scope.row)"></i>
 					</template>

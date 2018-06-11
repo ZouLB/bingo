@@ -15,10 +15,6 @@
 						<el-dropdown-item @click.native="exitLogin"><i class="el-icon-cal-exit"></i>退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-      	<!--<p @click="exitLogin">
-      		<i class="el-icon-cal-exit"></i>
-      		<span>退出登录</span>
-      	</p>-->
       </div>
   </div>
 </template>
@@ -90,7 +86,7 @@
   .head{
 	  width:100%;
 	  height:60px;
-	  font:17px/57px "微软雅黑";
+	  font:17px/60px "微软雅黑";
 	  color: white;
 	  background-color: #0085B5;
 	 	text-indent: 22px;

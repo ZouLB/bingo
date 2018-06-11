@@ -27,6 +27,7 @@
 							    placeholder="请选择或输入标签">
 							    <el-option
 							      v-for="(item,i) in selectTag"
+							      :key="i"
 							      :label="item[1]"
 							      :value="item[1]">
 							    </el-option>
@@ -212,6 +213,6 @@
 
 <style scoped="scoped" lang="scss">
 
-	@import "src/assets/scss/style.scss";
+	@import "src/assets/scss/_common.scss";
         
 </style>

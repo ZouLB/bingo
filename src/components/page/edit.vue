@@ -24,7 +24,8 @@
 							    default-first-option
 							    placeholder="请选择或输入标签">
 							    <el-option
-							      v-for="item in selectTag"
+							      v-for="(item,index) in selectTag"
+							      :key="index"
 							      :label="item[1]"
 							      :value="item[1]">
 							    </el-option>
@@ -247,6 +248,6 @@
 
 <style scoped="scoped" lang="scss">
 
-	@import "src/assets/scss/style.scss";
+	@import "src/assets/scss/_common.scss";
 	
 </style>
