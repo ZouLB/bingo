@@ -33,14 +33,14 @@
 		},
 		methods:{
 			exitLogin(){
-				this.$confirm('确认退出吗?', '提示')
-				.then(() => {
+//				this.$confirm('确认退出吗?', '提示')
+//				.then(() => {
 //					sessionStorage.removeItem('user');
 					this.$router.push({ path: '/login' });
-				})
-				.catch(() => {
-
-				});
+//				})
+//				.catch(() => {
+//
+//				});
 			}
 		},
     watch: {

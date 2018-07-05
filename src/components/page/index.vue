@@ -105,7 +105,7 @@
 						this.addFormVisible=false;
 					}
 				});
-			},
+			}
 		},
 		mounted(){
 			this.getProData();

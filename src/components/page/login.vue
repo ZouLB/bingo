@@ -1,6 +1,6 @@
 <template>
 	<section class="loginBox">
-		<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+		<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="demo-ruleForm login-container"  @keyup.native.13="handleSubmit">
 		    <h3 class="title">系统登录</h3>
 		    <el-form-item prop="account">
 		      <el-input type="text" prefix-icon="el-icon-cal-account" v-model="ruleForm.account" auto-complete="off" placeholder="请输入账号"></el-input>
@@ -9,7 +9,7 @@
 		      <el-input type="password" prefix-icon="el-icon-cal-password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="请输入密码"></el-input>
 		    </el-form-item>
 		    <el-form-item >
-		      <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="logining">登录</el-button>
+		      <el-button type="primary" style="width:100%;" @click.prevent="handleSubmit" :loading="logining">登录</el-button>
 		    </el-form-item>
 		</el-form>
 	</section>

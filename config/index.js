@@ -2,7 +2,6 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-var proxyConfig = require('./proxyConfig')
 
 const path = require('path')
 
@@ -11,8 +10,18 @@ module.exports = {
   	
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
-    proxyTable: proxyConfig.proxy,
+    assetsPublicPath: '/',
+//  proxyTable: proxyConfig.proxy,
+		
+		proxyTable: {
+      '/base/': {
+        target:'http://10.201.76.230:8080/rds/project/0c79cdcbaf9248ccaf94e073542ad6bf/command',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/base': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -52,7 +61,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps

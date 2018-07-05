@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //let base = 'http://10.201.76.230:8080/rds/project/0c79cdcbaf9248ccaf94e073542ad6bf/command';
-let base = process.env.URL;
+let base = process.env.API_URL;
 
 //获取项目
 export const getProject = params => { return axios.get(`${base}/selectAllCalProject`, { params: params}); };
